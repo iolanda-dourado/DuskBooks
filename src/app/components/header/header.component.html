@@ -1,0 +1,32 @@
+<!-- Barra de Navegação -->
+<nav class="bg-black text-white shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 py-8 flex justify-between items-center">
+    <!-- Logo -->
+    <a [routerLink]="['/']" class="font-txt-title text-4xl font-bold hover:text-purple-600">Dusk Books</a>
+
+    <!-- Links de Navegação e Botões -->
+    <ul class="flex space-x-8 text-2xl items-center">
+      <!-- Links -->
+      <li><a [routerLink]="['/']" class="hover:text-purple-600 cursor-pointer text-xl"><i class="fa-solid fa-house"></i></a></li>
+      <li><a [routerLink]="['/books']" class="hover:text-purple-600 cursor-pointer">Books</a></li>
+      <li><a [routerLink]="['/books']" class="hover:text-purple-600 cursor-pointer">Categories</a></li>
+      <li><a [routerLink]="['/books']" class="hover:text-purple-600 cursor-pointer">Reviews</a></li>
+
+      <!-- Botão Sign in -->
+      <li>
+        <a href="#"
+          class="hover:text-purple-600 border border-white text-white py-1.5 px-6 rounded-md transition-all cursor-pointer hover:scale-105 text-xl">
+          Sign in
+        </a>
+      </li>
+
+      <!-- Botão Sign up -->
+      <li>
+        <a href="#"
+          class="bg-purple-600 text-white font-semibold py-1.5 px-6 rounded-md hover:bg-purple-700 transition-all cursor-pointer hover:scale-105 text-xl">
+          Sign up
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

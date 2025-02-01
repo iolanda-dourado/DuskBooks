@@ -1,0 +1,75 @@
+# Ignorar node_modules (dependências do projeto)
+/node_modules
+
+# Ignorar pasta dist (arquivos de build)
+/dist
+
+# Ignorar configurações do ambiente local
+/src/environments/environment.ts
+/src/environments/environment.prod.ts
+
+# Ignorar arquivos de cache do Angular
+/.angular/cache
+
+# Ignorar arquivos de configuração do IDE (VSCode)
+/.vscode
+
+# Ignorar arquivos de log e temporários
+*.log
+*.tmp
+
+# Ignorar arquivos de configuração do npm
+/package-lock.json
+/yarn.lock
+
+# Ignorar arquivos de configuração do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Ignorar arquivos de configuração do editor
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Ignorar arquivos de teste e cobertura
+/coverage
+/test-results
+
+# Ignorar arquivos de configuração do Chrome para testes
+/chrome-profile
+
+# Ignorar arquivos de configuração do compilador TypeScript
+*.tsbuildinfo
+
+# Ignorar arquivos de configuração do Jest (se usado)
+/jest.config.js
+/jest.config.ts
+
+# Ignorar arquivos de configuração do Cypress (se usado)
+/cypress/videos
+/cypress/screenshots
+/cypress/fixtures
+/cypress/plugins
+/cypress/support
+/cypress.json
+/cypress.env.json
+
+# Ignorar arquivos de configuração do ESLint (se usado)
+/.eslintcache
+/.eslintrc.json
+/.eslintrc.js
+
+# Ignorar arquivos de configuração do Prettier (se usado)
+/.prettierrc
+/.prettierignore
+
+# Ignorar arquivos gerados pelo Tailwind CSS
+/tailwind.config.js
+/tailwind.config.ts
+/tailwind.css
+/tailwind.output.css
+/tailwind.output.js
+/tailwind.output.ts

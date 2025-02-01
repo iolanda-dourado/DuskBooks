@@ -1,0 +1,19 @@
+<div *ngIf="book"
+  class="bg-slate-50 text-black p-4 shadow-lg border border-[#4A2A5F] hover:shadow-xl transition-shadow">
+
+  <!-- Imagem do livro -->
+  <div class="w-full h-96 overflow-hidden rounded-md">
+    <img class="w-full h-full object-fill" [src]="book.cover" [alt]="book.title + ' cover image'">
+  </div>
+
+  <!-- Título do livro com limite de tamanho -->
+  <a [routerLink]="['book', book.isbn]">
+    <h1 class="text-2xl font-bold mt-3 truncate">{{ book.title }}</h1>
+  </a>
+
+  <!-- Autor do livro -->
+  <h2 class="text-xl font-medium mt-2 truncate">{{ book.author }}</h2>
+
+  <!-- Preço do livro -->
+  <p class="text-purple-950 font-bold mt-2 text-2xl">R$ {{ book.price }}</p>
+</div>
