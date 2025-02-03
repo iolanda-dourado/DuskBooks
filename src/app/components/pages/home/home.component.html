@@ -1,72 +1,75 @@
 <!-- Seção Principal (Hero Section) -->
 <section>
-  <section class="h-screen bg-cover bg-center relative"
-    style="background-image: url('https://images.unsplash.com/photo-1495446815901-a7297e633e8d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');">
+  <section class="h-height90vh bg-cover bg-center relative"
+    style="background-image: url('../../../../assets/hero-image.png')">
     <!-- Overlay escuro para melhorar a legibilidade do texto -->
     <div class="absolute inset-0 bg-black opacity-50"></div>
 
     <!-- Conteúdo centralizado -->
-    <div class="relative z-10 max-w-7xl mx-auto px-6 py-32 text-center text-white">
+    <div class="flex flex-col justify-end relative z-10 max-w-7xl mx-auto px-6 pt-48 text-left text-white">
       <!-- Título principal -->
-      <h2 class="text-5xl font-bold mb-6">Welcome to Dusk Books</h2>
+      <h2 class="text-4xl font-bold mb-6">Welcome to Dusk Books</h2>
 
       <!-- Subtítulo -->
-      <p class="text-xl mb-8">Discover a world of stories, knowledge, and imagination.</p>
+      <p class="text-2xl mb-8">
+        Discover a world of stories, knowledge, and imagination.
+      </p>
 
       <!-- Botão de chamada para ação -->
-      <a [routerLink]="['/books']"
-        class="bg-purple-600 px-8 py-4 rounded-full text-white text-lg font-semibold hover:bg-purple-700 transition">
-        Explore Our Collection
+      <div class="inline-block group"> <!-- Container ajustado -->
+        <a [routerLink]="['/books']"
+          class="inline-block"> <!-- Link como inline-block -->
+          <button class="px-6 py-3 text-2xl text-white bg-black/50 hover:bg-black/60 backdrop-blur-sm border-2 border-white/10 rounded-lg 
+                         transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:border-white/10 
+                         flex items-center gap-4 w-fit"> <!-- Adicionado w-fit -->
+            <span class="text-shadow-lg">Explore our collection</span>
+            <span class="group-hover:translate-x-2 transition-transform duration-300">→</span>
+          </button>
+        </a>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- Seção de Highlights -->
+<section id="highlights"
+  class="py-16 text-white">
+  <div class="max-w-5xl mx-auto px-4">
+    <h2 class="text-4xl font-bold text-center mb-8">Our Collection Highlights</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div *ngFor="let book of books">
+        <app-book-detail [book]="book"></app-book-detail>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-gray-100 grid grid-cols-2 min-h-[500px] px-32">
+  <!-- Image Column -->
+  <div class="my-16 flex items-center justify-end pr-12">
+    <img src="../../../../assets/img2.jpg"
+      alt="Curated book collection display"
+      class="rounded-md w-full shadow-xl">
+  </div>
+
+  <!-- Text Column -->
+  <div class="flex flex-col justify-center px-8 space-y-6 py-12">
+    <h2 class="text-4xl font-bold text-black mb-4">
+      Discover your next great read
+    </h2>
+
+    <p class="text-xl text-gray-900 leading-relaxed">
+      At Dusk Books, we curate an exceptional collection spanning timeless classics and contemporary masterpieces.
+      Whether you're seeking page-turning thrillers, thought-provoking non-fiction, or heartwarming literary fiction,
+      our shelves hold stories that resonate with every reader.
+    </p>
+
+    <div class="mt-8">
+      <a routerLink="/books">
+        <app-button buttonText="Browse Full Catalog"
+          fontSize="1.5rem"
+          padding=".5rem 1rem"></app-button>
       </a>
     </div>
-  </section>
-  <section class="h-screen bg-cover bg-center relative"
-    style="background-image: url('https://images.unsplash.com/photo-1495446815901-a7297e633e8d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');">
-
-  </section>
-</section>
-
-<!-- Seção Sobre -->
-<section id="about" class="py-16 bg-gray-100">
-  <div class="max-w-7xl mx-auto px-6 text-center">
-    <h3 class="text-3xl font-semibold mb-4">Sobre Nós</h3>
-    <p class="text-lg text-gray-600">Somos uma equipe dedicada a criar experiências digitais excepcionais. Nosso foco é
-      sempre em inovação e excelência.</p>
-  </div>
-</section>
-
-<!-- Seção de Serviços -->
-<section id="services" class="py-16 bg-white">
-  <div class="max-w-7xl mx-auto px-6 text-center">
-    <h3 class="text-3xl font-semibold mb-8">Nossos Serviços</h3>
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="bg-gray-200 p-6 rounded-lg shadow-lg">
-        <h4 class="text-2xl font-semibold mb-4">Consultoria</h4>
-        <p class="text-gray-600">Ajudamos sua empresa a alcançar seus objetivos com soluções personalizadas e eficazes.
-        </p>
-      </div>
-      <div class="bg-gray-200 p-6 rounded-lg shadow-lg">
-        <h4 class="text-2xl font-semibold mb-4">Desenvolvimento</h4>
-        <p class="text-gray-600">Criamos sites e aplicativos modernos e responsivos para melhorar a experiência do
-          usuário.</p>
-      </div>
-      <div class="bg-gray-200 p-6 rounded-lg shadow-lg">
-        <h4 class="text-2xl font-semibold mb-4">Marketing Digital</h4>
-        <p class="text-gray-600">Ajudamos sua marca a crescer com estratégias eficazes de marketing online e campanhas
-          de mídia social.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Seção de Contato -->
-<section id="contact" class="py-16 bg-gray-100">
-  <div class="max-w-7xl mx-auto px-6 text-center">
-    <h3 class="text-3xl font-semibold mb-4">Entre em Contato</h3>
-    <p class="text-lg text-gray-600 mb-6">Entre em contato para saber mais sobre como podemos ajudar a sua empresa a
-      crescer.</p>
-    <a href="mailto:contato@meusite.com"
-      class="bg-blue-600 px-6 py-3 rounded-full text-white text-lg font-semibold hover:bg-blue-500 transition">Enviar um
-      E-mail</a>
   </div>
 </section>

@@ -1,10 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { BookServiceService } from '../../services/book-service.service';
-import { BookSummary } from '../../interfaces/book-summary';
 import { RouterLink, RouterModule } from '@angular/router';
 import { NgFor, NgIf } from '@angular/common';
 import { BookDetailComponent } from '../book-detail/book-detail.component';
 import { Book } from '../../interfaces/book';
+import { BookService } from '../../services/book.service';
 
 @Component({
   selector: 'app-books-listing',
@@ -14,26 +13,26 @@ import { Book } from '../../interfaces/book';
   styleUrl: './books-listing.component.css',
 })
 export class BooksListingComponent implements OnInit {
-  @Output() selectedBook = new EventEmitter<BookSummary>();
-
+  @Output() selectedBook = new EventEmitter<Book>();
   books: Book[] = [];
+  isLoading: boolean = true;
 
-  constructor(private bookService: BookServiceService) {
-    console.log('BooksListingComponent carregado!');
-  }
+  constructor(private bookService: BookService) {}
 
   ngOnInit(): void {
     this.bookService.getAvailableBooks().subscribe({
       next: (books) => {
         this.books = books;
+        this.isLoading = false;
       },
       error: (err) => {
         console.error('Error obtaining the books list: ', err);
+        this.isLoading = false;
       },
     });
   }
 
-  selectBook(book: BookSummary): void {
+  selectBook(book: Book): void {
     this.selectedBook.emit(book);
   }
 }

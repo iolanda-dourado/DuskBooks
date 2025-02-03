@@ -1,10 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BookServiceService } from '../../services/book-service.service';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Book } from '../../interfaces/book';
 import { NgIf } from '@angular/common';
-import { BooksListingComponent } from '../books-listing/books-listing.component';
-import { BookSummary } from '../../interfaces/book-summary';
 
 @Component({
   selector: 'app-book-detail',
