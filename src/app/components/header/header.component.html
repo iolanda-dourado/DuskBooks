@@ -1,6 +1,5 @@
 <!-- Barra de Navegação -->
-<nav
-  class="bg-black w-full z-50 transition-all duration-300 text-white shadow-lg">
+<nav class="bg-black w-full z-50 transition-all duration-300 text-white shadow-lg">
   <div
     class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
     <!-- Logo -->
@@ -51,6 +50,14 @@
           Sign up
         </a>
       </li>
+
+      <li>
+        <a [routerLink]="['/logout']"
+          class="hover:text-purple-600 hover:font-bold text-white py-1 px-3 transition-all cursor-pointer hover:scale-105">
+          Logout
+        </a>
+      </li>
+
     </ul>
   </div>
 </nav>

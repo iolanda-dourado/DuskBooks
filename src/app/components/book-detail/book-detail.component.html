@@ -3,7 +3,7 @@
          rounded-md border-2 border-purple-100 hover:border-purple-200 relative overflow-hidden
          hover:-translate-y-1 transform">
 
-  <!-- Imagem do livro com efeito hover -->
+  <!-- Imagem do livro -->
   <div class="w-full aspect-[3/4] overflow-hidden rounded-md shadow-lg">
     <a [routerLink]="['/book', book.isbn]"
       class="block h-full">
@@ -16,7 +16,6 @@
 
   <!-- Conteúdo textual -->
   <div class="pt-4 space-y-3">
-    <!-- Título do livro -->
     <a [routerLink]="['/book', book.isbn]"
       class="hover:text-purple-800 transition-colors">
       <h1 class="text-2xl font-bold truncate leading-tight text-black">
@@ -31,8 +30,8 @@
     <div class="flex justify-between items-center mt-4">
       <p class="text-purple-900 font-bold text-2xl flex items-center">€ {{book.price}}
       </p>
-      
-<!-- <button class="bg-purple-600 text-white px-5 py-2 rounded-lg font-semibold
+
+      <!-- <button class="bg-purple-600 text-white px-5 py-2 rounded-lg font-semibold
                     opacity-0 group-hover:opacity-100 transition-opacity duration-300
                     hover:bg-purple-700 shadow-md">
         Add to Cart

@@ -4,6 +4,8 @@ import { BooksListingComponent } from './components/books-listing/books-listing.
 import { BookPageComponent } from './components/pages/book-page/book-page.component';
 import { SigninPageComponent } from './components/pages/signin-page/signin-page.component';
 import { SignupPageComponent } from './components/pages/signup-page/signup-page.component';
+import { UserAreaComponent } from './components/pages/user-area/user-area.component';
+import { authenticationGuard } from './guards/authentication.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -11,4 +13,5 @@ export const routes: Routes = [
   { path: 'book/:isbn', component: BookPageComponent },
   { path: 'signin', component: SigninPageComponent },
   { path: 'signup', component: SignupPageComponent },
+  { path: 'user-area', component: UserAreaComponent, canActivate: [authenticationGuard], },
 ];

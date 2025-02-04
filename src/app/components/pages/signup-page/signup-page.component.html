@@ -1,42 +1,72 @@
-<section class="rounded-lg bg-white shadow-xl p-8 max-w-md mx-auto m-24 text-center">
+<section class="m-24 rounded-lg bg-white shadow-xl p-8 max-w-md mx-auto text-center">
   <div class="space-y-8">
-    <h1 class="text-3xl font-bold text-gray-800 mb-10">Sign up to your account</h1>
+    <h1 class="text-3xl font-bold text-gray-800 mb-10">Sign up to our website</h1>
 
-    <div class="space-y-6 text-xl">
-      <div class="space-y-2">
-        <label for="name"
-          class="block text-left text-gray-700 font-medium">Email</label>
-        <input type="text"
-          name="name"
-          id="name"
-          class="w-full px-4 py-3 rounded-lg border-2 border-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-800 transition-colors"
-          placeholder="Jane Doe">
-      </div>
+    <form [formGroup]="signupForm"
+      #formDirective="ngForm">
 
-      <div class="space-y-2">
-        <label for="email"
-          class="block text-left text-gray-700 font-medium">Email</label>
-        <input type="email"
-          name="email"
-          id="email"
-          class="w-full px-4 py-3 rounded-lg border-2 border-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-800 transition-colors"
-          placeholder="example@email.com">
-      </div>
+      <div class="space-y-6 text-xl">
+        <!--Nome label e input-->
+        <div class="space-y-2">
+          <label for="name"
+            class="form-label">Name</label>
+          <input type="text"
+            id="name"
+            class="form-input"
+            placeholder="Jane Smith"
+            required
+            formControlName="name">
+          <div *ngIf="name!.invalid && submitted"
+            class="validation-error">
+            <p *ngIf="name!.errors?.['required']"><i class="fa-solid fa-exclamation"></i> The name is mandatory.</p>
+            <p *ngIf="name!.errors?.['minlength']"><i class="fa-solid fa-exclamation"></i> Insert at least 6 characters.
+            </p>
+          </div>
 
-      <div class="space-y-2">
-        <label for="password"
-          class="block text-left text-gray-700 font-medium">Password</label>
-        <input type="password"
-          name="password"
-          id="password"
-          class="w-full px-4 py-3 rounded-lg border-2 border-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-800 transition-colors"
-          placeholder="••••••••">
+          <!--Email label e input-->
+          <div class="space-y-2">
+            <label for="email"
+              class="form-label">Email</label>
+            <input type="email"
+              id="email"
+              class="form-input"
+              placeholder="example@email.com"
+              required
+              formControlName="email">
+            <div *ngIf="email!.invalid && submitted"
+              class="validation-error">
+              <p *ngIf="email!.errors?.['required']"><i class="fa-solid fa-exclamation"></i> The email is mandatory.</p>
+              <p *ngIf="email!.errors?.['email']"><i class="fa-solid fa-exclamation"></i> Invalid email format</p>
+            </div>
+
+            <div class="space-y-2">
+              <label for="password"
+                class="form-label">Password</label>
+              <input type="password"
+                id="password"
+                class="form-input"
+                placeholder="••••••••"
+                formControlName="password">
+
+              <div *ngIf="password!.invalid && submitted"
+                class="validation-error">
+                <p *ngIf="password!.errors?.['required']"><i class="fa-solid fa-exclamation"></i> The password is mandatory.
+                </p>
+                <i class="fa-solid fa-exclamation"></i>
+                <p *ngIf="password!.errors?.['minlength']"><i class="fa-solid fa-exclamation"></i> Insert at least 6
+                  characters.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </form>
 
     <app-button buttonText="Sign up"
       fontSize="1.25rem"
-      padding=".4rem .8rem">
+      padding=".4rem .8rem"
+      (click)="signupUser()">
     </app-button>
   </div>
 </section>

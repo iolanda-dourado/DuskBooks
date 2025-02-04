@@ -32,3 +32,26 @@ app-root {
   padding-top: 80px;
   /* Ajuste conforme a altura do header */
 }
+
+.validation-error {
+  color: rgb(192, 23, 23);
+  display: flex;
+}
+
+@layer components {
+  .form-input {
+    @apply w-full px-4 py-3 rounded-lg border-2 border-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-800 transition-colors;
+  }
+
+  .form-label {
+    @apply block text-left text-gray-700 font-medium;
+  }
+
+  .auth-container {
+    @apply m-24 rounded-lg bg-white shadow-xl p-8 max-w-md mx-auto text-center;
+  }
+
+  .auth-title {
+    @apply text-3xl font-bold text-gray-800 mb-10;
+  }
+}
