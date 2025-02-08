@@ -36,7 +36,7 @@
       </li>
 
       <!-- Botão Sign in -->
-      <li>
+      <li *ngIf="!isAuthenticated">
         <a [routerLink]="['/signin']"
           class="hover:text-purple-600 hover:font-bold text-white py-1 px-3 transition-all cursor-pointer hover:scale-105">
           Sign in
@@ -44,14 +44,14 @@
       </li>
 
       <!-- Botão Sign up -->
-      <li>
+      <li *ngIf="!isAuthenticated">
         <a [routerLink]="['/signup']"
           class="border border-white text-white font-bold py-1 px-3 rounded-md hover:bg-purple-600 transition-all cursor-pointer hover:scale-105">
           Sign up
         </a>
       </li>
 
-      <li>
+      <li *ngIf="isAuthenticated">
         <a [routerLink]="['/logout']"
           class="hover:text-purple-600 hover:font-bold text-white py-1 px-3 transition-all cursor-pointer hover:scale-105">
           Logout

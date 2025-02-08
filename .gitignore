@@ -65,11 +65,3 @@ Thumbs.db
 # Ignorar arquivos de configuração do Prettier (se usado)
 /.prettierrc
 /.prettierignore
-
-# Ignorar arquivos gerados pelo Tailwind CSS
-/tailwind.config.js
-/tailwind.config.ts
-/tailwind.css
-/tailwind.output.css
-/tailwind.output.js
-/tailwind.output.ts

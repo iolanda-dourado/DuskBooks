@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
 import { TokenService } from './token.service';
 import { User } from '../interfaces/user';
 
@@ -23,7 +23,16 @@ export class AuthenticationService {
     return this.http
       .post<any>(`${this.endpoint}signin`, { email, password })
       .pipe(
-        map((user) => this.tokenSrv.saveToken('user', JSON.stringify(user))),
+        map((response) => {
+          // Verifique se o token está presente na resposta
+          if (response && response.token) {
+            this.tokenSrv.saveToken('user', JSON.stringify(response));
+            this.getUserData().subscribe((user) => {
+              this.userSubject.next(user); // Atualiza o BehaviorSubject com os dados do usuário
+            });
+          }
+          return response;
+        }),
         catchError(this.handleError<User>('login'))
       );
   }
@@ -31,12 +40,12 @@ export class AuthenticationService {
   register(user: User): Observable<User> {
     return this.http
       .post<User>(`${this.endpoint}signup`, user)
-      .pipe(catchError(this.handleError<User>('register'))
-      );
+      .pipe(catchError(this.handleError<User>('register')));
   }
-  
+
   logout() {
     this.tokenSrv.deleteToken('user');
+    this.userSubject.next(null); 
   }
 
   hasToken() {
@@ -50,5 +59,11 @@ export class AuthenticationService {
       console.log(`${operation} failed: ${error.message}`);
       return of(result as T);
     };
+  }
+
+  getUserData(): Observable<User> {
+    return this.http
+      .get<User>(this.endpoint)
+      .pipe(catchError(this.handleError<User>('getUserData')));
   }
 }
