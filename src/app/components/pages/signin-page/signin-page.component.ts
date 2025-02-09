@@ -57,7 +57,7 @@ export class SigninPageComponent implements OnInit {
     this.authenticationService.login(email, password).subscribe({
       next: (response) => {
         console.log('Login successful', response);
-        this.router.navigate(['user-area']);
+        this.router.navigate(['']);
 
         // this.pageLoader.hideLoader();
       },

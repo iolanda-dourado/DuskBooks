@@ -20,7 +20,7 @@ export class BookService {
   // 2 - Obtém todos os livros existentes
   // -> Restrito a CLIENT
   getBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>(`${this.endpoint}s`);
+    return this.http.get<Book[]>(`${this.endpoint}`);
   }
 
   // 3 - Obtém todos os livros disponíveis
@@ -60,7 +60,7 @@ export class BookService {
 
   // 8 - Remove o livro pelo ISBN
   // -> Restrito a MANAGER
-  deleteBook(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.endpoint}${id}`);
+  deleteBook(isbn: string): Observable<void> {
+    return this.http.delete<void>(`${this.endpoint}${isbn}`);
   }
 }

@@ -8,13 +8,22 @@
       ← Back to Books
     </button>
 
+    <!-- Manager buttons -->
+    <div *ngIf="isAuthenticated && userRole === 'manager'"
+      class="flex justify-end gap-4 mb-8">
+      <app-button-edit-book></app-button-edit-book>
+      <app-button-update-availability></app-button-update-availability>
+      <app-button-remove-book [isbn]="book.isbn"></app-button-remove-book>
+    </div>
+
     <div class="flex flex-col lg:flex-row gap-8">
       <!-- Capa do Livro (40% width) -->
       <div class="lg:w-2/5">
         <div class="bg-white p-4 rounded-lg shadow-md">
           <img [src]="book.cover"
             [alt]="book.title + ' cover image'"
-            class="w-full h-auto object-contain max-h-[500px] rounded-xl">
+            class="w-full h-auto object-contain max-h-[500px] rounded-xl"
+            (error)="book.cover = 'https://www.hachette.co.nz/graphics/CoverNotAvailable.jpg'">
         </div>
       </div>
 
@@ -73,6 +82,6 @@
     </div>
 
     <!-- Seção de Categoria -->
-    
+
   </div>
 </section>

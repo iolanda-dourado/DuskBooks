@@ -10,10 +10,22 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { UnauthorizedPageComponent } from './components/pages/unauthorized-page/unauthorized-page.component';
 import { AddBookPageComponent } from './components/pages/add-book-page/add-book-page.component';
 import { managerGuard } from './guards/manager.guard';
+import { AllBooksListingComponent } from './components/all-books-listing/all-books-listing.component';
+import { UnavailableBooksListingComponent } from './components/unavailable-books-listing/unavailable-books-listing.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
+  {
+    path: 'books/all',
+    component: AllBooksListingComponent,
+    canActivate: [authenticationGuard],
+  },
   { path: 'books/available', component: BooksListingComponent },
+  {
+    path: 'books/unavailable',
+    component: UnavailableBooksListingComponent,
+    canActivate: [managerGuard],
+  },
   { path: 'book/:isbn', component: BookPageComponent },
   { path: 'signin', component: SigninPageComponent },
   { path: 'signup', component: SignupPageComponent },

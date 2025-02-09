@@ -22,14 +22,14 @@
     <!-- Links de Navegação e Botões -->
     <ul class="flex flex-wrap justify-center space-x-4 space-y-2 md:space-y-0 text-xl items-center">
       <!-- Links -->
+      <li *ngIf="isAuthenticated && role === 'client'">
+        <a [routerLink]="['/books/all']"
+          class="hover:text-purple-600 hover:font-bold cursor-pointer">All Books</a>
+      </li>
+
       <li>
         <a [routerLink]="['/books/available']"
           class="hover:text-purple-600 hover:font-bold cursor-pointer">Available Books</a>
-      </li>
-
-      <li *ngIf="isAuthenticated && role === 'client'">
-        <a [routerLink]="['/books']"
-          class="hover:text-purple-600 hover:font-bold cursor-pointer">All Books</a>
       </li>
 
       <li>

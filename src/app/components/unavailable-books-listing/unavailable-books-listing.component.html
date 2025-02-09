@@ -1,10 +1,16 @@
 <!-- books-listing.component.html -->
+
+<div class="flex justify-end space-x-4 mx-24 mt-12 mb-8">
+  <app-button-add-book></app-button-add-book>
+  <app-button-get-unavailable-books></app-button-get-unavailable-books>
+</div>
+
 <div class="min-h-screen flex flex-col">
   <div class="flex-grow mb-24">
     <!-- Loading State -->
     <div *ngIf="isLoading"
       class="m-24 animate-pulse h-80">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-24">
         <div *ngFor="let _ of [].constructor(4)">
           <div class="h-96 bg-gray-200 rounded-md"></div>
           <div class="h-6 bg-gray-200 mt-4 w-3/4"></div>
@@ -15,17 +21,7 @@
 
     <!-- Conteúdo Real -->
     <section *ngIf="!isLoading"
-      [ngClass]="{
-        'mx-24': true, 
-        'm-24': role !== 'manager'
-      }">
-
-      <!-- Subheader apenas para managers -->
-      <div *ngIf="role === 'manager'"
-        class="flex justify-end space-x-4 mt-12 mb-8">
-        <app-button-add-book></app-button-add-book>
-        <app-button-get-unavailable-books></app-button-get-unavailable-books>
-      </div>
+      class="mx-24 mb-24">
 
       <!-- Listagem de livros -->
       <div *ngIf="books.length > 0"
