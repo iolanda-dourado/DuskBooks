@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SubmenuComponent } from './submenu.component';
+import { ConfirmDialogComponent } from './confirm-dialog.component';
 
-describe('SubmenuComponent', () => {
-  let component: SubmenuComponent;
-  let fixture: ComponentFixture<SubmenuComponent>;
+describe('ConfirmDialogComponent', () => {
+  let component: ConfirmDialogComponent;
+  let fixture: ComponentFixture<ConfirmDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SubmenuComponent]
+      imports: [ConfirmDialogComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(SubmenuComponent);
+    fixture = TestBed.createComponent(ConfirmDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

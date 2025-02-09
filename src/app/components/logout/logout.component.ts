@@ -16,7 +16,7 @@ export class LogoutComponent {
     private router: Router
   ) {
     this.authService.logout();
-    console.log('Redirecionando para a página de login...');
-    this.router.navigate(['/']); // Redireciona para a homepage após logout
+    console.log('Redirecionando para a home...');
+    this.router.navigate(['/']);
   }
 }

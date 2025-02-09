@@ -51,11 +51,10 @@ export class BookService {
 
   // 7 - Atualiza a disponibilidade do livro pelo ISBN
   // -> Restrito a MANAGER
-  putBookDisponibility(updatedBook: Book, isbn: string): Observable<Book> {
-    return this.http.put<Book>(
-      `${this.endpoint}${updatedBook.isbn}${isbn}/availability`,
-      updatedBook
-    );
+  patchBookDisponibility(isbn: string): Observable<Book> {
+    return this.http.patch<Book>(`${this.endpoint}${isbn}/availability`, null, {
+      observe: 'body', // Faz com que a resposta seja tratada como o corpo (não como ArrayBuffer)
+    });
   }
 
   // 8 - Remove o livro pelo ISBN
