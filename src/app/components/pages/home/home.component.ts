@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ButtonComponent } from "../../button/button.component";
+import { ButtonComponent } from '../../buttons/button/button.component';
 import { Book } from '../../../interfaces/book';
 import { NgFor, NgIf } from '@angular/common';
-import { BookDetailComponent } from "../../book-detail/book-detail.component";
+import { BookDetailComponent } from '../../book-detail/book-detail.component';
 import { BookService } from '../../../services/book.service';
 
 @Component({
@@ -16,7 +16,7 @@ import { BookService } from '../../../services/book.service';
 export class HomeComponent implements OnInit {
   books: Book[] = []; // Lista de livros
 
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService) {}
 
   ngOnInit(): void {
     this.bookService.getAvailableBooks().subscribe({

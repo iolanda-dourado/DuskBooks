@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ButtonComponent } from '../../button/button.component';
+import { ButtonComponent } from '../../buttons/button/button.component';
 import {
   FormControl,
   FormGroup,
@@ -29,7 +29,10 @@ export class SigninPageComponent implements OnInit {
   ngOnInit(): void {
     this.signinForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
     });
   }
 

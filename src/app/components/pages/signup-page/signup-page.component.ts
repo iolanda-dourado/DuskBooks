@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ButtonComponent } from '../../button/button.component';
+import { ButtonComponent } from '../../buttons/button/button.component';
 import {
   FormControl,
   FormGroup,
@@ -58,7 +58,7 @@ export class SignupPageComponent {
 
     this.authenticationService.register(this.signupForm.value).subscribe({
       next: (response: any) => {
-        console.log("Registration succesful", response);
+        console.log('Registration succesful', response);
 
         // this.pageLoader.hideLoader();
         this.router.navigate(['signin']);
@@ -66,9 +66,11 @@ export class SignupPageComponent {
       error: (error: any) => {
         // this.pageLoader.hideLoader();
         if (error.error instanceof ErrorEvent) {
-          console.error("Client error: ", error.error.message);
+          console.error('Client error: ', error.error.message);
         } else {
-          console.error(`Server error: [${error.status}]: ${error.error.message}`);
+          console.error(
+            `Server error: [${error.status}]: ${error.error.message}`
+          );
         }
       },
     });

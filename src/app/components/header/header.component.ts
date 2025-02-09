@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular
 import { Router, RouterModule } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { NgIf } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -11,23 +12,19 @@ import { NgIf } from '@angular/common';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-
   isAuthenticated = false;
+  private authSubscription!: Subscription;
+  role = '';
 
-  constructor(private authService: AuthenticationService, private router: Router) {
-    // Atualiza o estado de autenticação sempre que houver mudanças
-    this.authService.user.subscribe((user) => {
-      this.isAuthenticated = !!user; // Se houver um usuário, está autenticado
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router
+  ) {
+    this.authSubscription = this.authService.user.subscribe((user) => {
+      this.isAuthenticated = !!user;
+      this.role = user?.role || ''; // Atualiza a role quando o user muda
     });
+
+    this.role = this.authService.getUserRole() || '';
   }
-
-
-  // isScrolled = false;
-  // @ViewChild('heroSection') heroSection!: ElementRef;
-
-  // @HostListener('window:scroll')
-  // onWindowScroll() {
-  //   const heroHeight = this.heroSection?.nativeElement.offsetHeight || 0;
-  //   this.isScrolled = window.scrollY > heroHeight;
-  // }
 }

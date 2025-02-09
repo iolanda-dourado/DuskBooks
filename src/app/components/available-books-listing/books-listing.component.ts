@@ -1,14 +1,18 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { RouterLink, RouterModule } from '@angular/router';
-import { NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { BookDetailComponent } from '../book-detail/book-detail.component';
 import { Book } from '../../interfaces/book';
 import { BookService } from '../../services/book.service';
+import { AuthenticationService } from '../../services/authentication.service';
+import { Subscription } from 'rxjs';
+import { ButtonAddBookComponent } from '../buttons/button-add-book/button-add-book.component';
+import { ButtonGetUnavailableBooksComponent } from '../buttons/button-get-unavailable-books/button-get-unavailable-books.component';
 
 @Component({
   selector: 'app-books-listing',
   standalone: true,
-  imports: [NgFor, NgIf, RouterModule, BookDetailComponent],
+  imports: [NgFor, NgIf, RouterModule, BookDetailComponent, NgClass, ButtonAddBookComponent, ButtonGetUnavailableBooksComponent],
   templateUrl: './books-listing.component.html',
   styleUrl: './books-listing.component.css',
 })
@@ -16,10 +20,23 @@ export class BooksListingComponent implements OnInit {
   @Output() selectedBook = new EventEmitter<Book>();
   books: Book[] = [];
   isLoading: boolean = true;
+  isAuthenticated: boolean = false;
+  role = '';
+  private authSubscription!: Subscription;
 
-  constructor(private bookService: BookService) {}
+  constructor(
+    private bookService: BookService,
+    private authService: AuthenticationService
+  ) {}
 
   ngOnInit(): void {
+    this.authSubscription = this.authService.user.subscribe((user) => {
+      this.isAuthenticated = !!user;
+      this.role = user?.role || ''; // Atualiza a role quando o user muda
+    });
+
+    this.role = this.authService.getUserRole() || '';
+
     this.bookService.getAvailableBooks().subscribe({
       next: (books) => {
         this.books = books;

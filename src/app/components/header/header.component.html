@@ -23,15 +23,21 @@
     <ul class="flex flex-wrap justify-center space-x-4 space-y-2 md:space-y-0 text-xl items-center">
       <!-- Links -->
       <li>
-        <a [routerLink]="['/books']"
-          class="hover:text-purple-600 hover:font-bold cursor-pointer">Books</a>
+        <a [routerLink]="['/books/available']"
+          class="hover:text-purple-600 hover:font-bold cursor-pointer">Available Books</a>
       </li>
-      <li>
+
+      <li *ngIf="isAuthenticated && role === 'client'">
         <a [routerLink]="['/books']"
+          class="hover:text-purple-600 hover:font-bold cursor-pointer">All Books</a>
+      </li>
+
+      <li>
+        <a [routerLink]="['/books/available']"
           class="hover:text-purple-600 hover:font-bold cursor-pointer">Categories</a>
       </li>
       <li>
-        <a [routerLink]="['/books']"
+        <a [routerLink]="['/books/available']"
           class="hover:text-purple-600 hover:font-bold cursor-pointer">Reviews</a>
       </li>
 
@@ -52,9 +58,16 @@
       </li>
 
       <li *ngIf="isAuthenticated">
+        <a [routerLink]="['/user-area']"
+          class="hover:text-purple-600 hover:font-bold text-white py-1 px-3 transition-all cursor-pointer hover:scale-105">
+          User Area
+        </a>
+      </li>
+
+      <li *ngIf="isAuthenticated">
         <a [routerLink]="['/logout']"
           class="hover:text-purple-600 hover:font-bold text-white py-1 px-3 transition-all cursor-pointer hover:scale-105">
-          Logout
+          <i class="fa-solid fa-right-from-bracket"></i>
         </a>
       </li>
 

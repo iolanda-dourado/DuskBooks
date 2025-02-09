@@ -45,7 +45,7 @@ export class AuthenticationService {
 
   logout() {
     this.tokenSrv.deleteToken('user');
-    this.userSubject.next(null); 
+    this.userSubject.next(null);
   }
 
   hasToken() {
@@ -65,5 +65,14 @@ export class AuthenticationService {
     return this.http
       .get<User>(this.endpoint)
       .pipe(catchError(this.handleError<User>('getUserData')));
+  }
+
+  getUserRole() {
+    return this.userSubject.value?.role;
+  }
+
+  isAuthenticated(): boolean {
+    // Implement your logic to check if the user is authenticated
+    return !!localStorage.getItem('token');
   }
 }
