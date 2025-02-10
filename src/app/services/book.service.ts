@@ -62,4 +62,8 @@ export class BookService {
   deleteBook(isbn: string): Observable<void> {
     return this.http.delete<void>(`${this.endpoint}${isbn}`);
   }
+
+  getBooksByCategory(categoryName: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.endpoint}?category=${categoryName}`);
+  }
 }

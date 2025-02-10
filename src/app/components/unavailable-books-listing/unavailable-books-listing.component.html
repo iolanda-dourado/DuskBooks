@@ -1,10 +1,4 @@
 <!-- books-listing.component.html -->
-
-<div class="flex justify-end space-x-4 mx-24 mt-12 mb-8">
-  <app-button-add-book></app-button-add-book>
-  <app-button-get-unavailable-books></app-button-get-unavailable-books>
-</div>
-
 <div class="min-h-screen flex flex-col">
   <div class="flex-grow mb-24">
     <!-- Loading State -->
@@ -20,22 +14,41 @@
     </div>
 
     <!-- Conteúdo Real -->
-    <section *ngIf="!isLoading"
-      class="mx-24 mb-24">
-
+    <section *ngIf="!isLoading" class="mx-24 mb-24">
+    
+      <div class="flex justify-end space-x-4">
+        <!-- Subheader apenas para managers -->
+        <div class="flex space-x-4 mt-12 mb-8">
+          <app-button-add-book></app-button-add-book>
+        </div>
+    
+        <!-- Dropdown de Categorias -->
+        <div class="flex space-x-4 mt-12 mb-8">
+          <select [(ngModel)]="selectedCategory"
+            (change)="filterBooksByCategory(selectedCategory)"
+            class="p-2 border border-gray-300 rounded-md">
+            <option value="all">All Categories</option>
+            <option *ngFor="let category of categories"
+              [value]="category.name">
+              {{ category.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+    
       <!-- Listagem de livros -->
-      <div *ngIf="books.length > 0"
+      <div *ngIf="filteredBooks.length > 0"
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        <div *ngFor="let book of books">
+        <div *ngFor="let book of filteredBooks">
           <app-book-detail [book]="book"></app-book-detail>
         </div>
       </div>
-
+    
       <!-- Estado Vazio -->
-      <div *ngIf="books.length === 0"
+      <div *ngIf="filteredBooks.length === 0"
         class="text-center text-gray-500">
         <p class="text-xl">No books were found.</p>
       </div>
     </section>
-  </div>
-</div>
+    </div>
+    </div>

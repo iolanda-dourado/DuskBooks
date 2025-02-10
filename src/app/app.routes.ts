@@ -12,6 +12,7 @@ import { AddBookPageComponent } from './components/pages/add-book-page/add-book-
 import { managerGuard } from './guards/manager.guard';
 import { AllBooksListingComponent } from './components/all-books-listing/all-books-listing.component';
 import { UnavailableBooksListingComponent } from './components/unavailable-books-listing/unavailable-books-listing.component';
+import { CategoriesListingPageComponent } from './components/pages/categories-listing-page/categories-listing-page.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -40,5 +41,10 @@ export const routes: Routes = [
     path: 'add-book',
     component: AddBookPageComponent,
     canActivate: [managerGuard],
+  },
+
+  {
+    path: 'categories',
+    component: CategoriesListingPageComponent,
   },
 ];

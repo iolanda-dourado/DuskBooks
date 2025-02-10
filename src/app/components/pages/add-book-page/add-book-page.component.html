@@ -36,7 +36,7 @@
         </div>
       </div>
 
-      <!-- author -->
+      <!-- Author -->
       <div class="space-y-2">
         <label for="author"
           class="block text-gray-700 font-medium">Author</label>
@@ -47,7 +47,7 @@
           placeholder="Enter authors (comma separated)">
         <div *ngIf="author!.invalid && (submitted || author!.touched)"
           class="validation-error">
-          <p *ngIf="author!.errors?.['required']"><i class="fa-solid fa-exclamation"></i> author are required</p>
+          <p *ngIf="author!.errors?.['required']"><i class="fa-solid fa-exclamation"></i> Author is required</p>
         </div>
       </div>
 
@@ -57,11 +57,17 @@
         <div class="space-y-2">
           <label for="category"
             class="block text-gray-700 font-medium">Category</label>
-          <input type="text"
-            id="category"
+          <select id="category"
             formControlName="category"
-            class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-purple-600 transition-colors"
-            placeholder="Enter category">
+            class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-purple-600 transition-colors">
+            <option value=""
+              disabled
+              selected>Select a category</option>
+            <option *ngFor="let category of categories"
+              [value]="category.name">
+              {{ category.name }}
+            </option>
+          </select>
           <div *ngIf="category!.invalid && (submitted || category!.touched)"
             class="validation-error">
             <p *ngIf="category!.errors?.['required']"><i class="fa-solid fa-exclamation"></i> Category is required</p>

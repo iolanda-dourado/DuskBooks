@@ -7,6 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { BookService } from '../../../services/book.service';
+import { CategoryService } from '../../../services/category.service'; // Importe o CategoryService
+import { Category } from '../../../interfaces/category'; // Importe a interface Category
 
 @Component({
   selector: 'app-add-book-page',
@@ -18,17 +20,32 @@ import { BookService } from '../../../services/book.service';
 export class AddBookPageComponent implements OnInit {
   addBookForm!: FormGroup;
   submitted = false;
+  categories: Category[] = []; // Lista de categorias
 
-  constructor(private bookService: BookService) {}
+  constructor(
+    private bookService: BookService,
+    private categoryService: CategoryService // Injete o CategoryService
+  ) {}
 
   ngOnInit(): void {
+    // Inicializa o formulário
     this.addBookForm = new FormGroup({
       isbn: new FormControl('', [Validators.required]),
       title: new FormControl('', [Validators.required]),
       author: new FormControl('', [Validators.required]),
-      category: new FormControl('', [Validators.required]),
+      category: new FormControl('', [Validators.required]), // Campo de categoria
       cover: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required]),
+    });
+
+    // Busca as categorias disponíveis
+    this.categoryService.getCategories().subscribe({
+      next: (categories) => {
+        this.categories = categories;
+      },
+      error: (err) => {
+        console.error('Error obtaining the categories list: ', err);
+      },
     });
   }
 

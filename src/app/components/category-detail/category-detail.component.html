@@ -1,0 +1,16 @@
+<div *ngIf="category"
+  class="group bg-white text-black shadow-xl hover:shadow-2xl transition-all duration-300 
+         rounded-b-md hover:border-purple-200 relative overflow-hidden
+         hover:-translate-y-1 transform">
+
+  <!-- Conteúdo textual -->
+  <section class="flex flex-col space-y-3 bg-white p-3 w-12">
+    <div class="p-3 space-y-3">
+        <h1 class="text-2xl font-bold truncate leading-tight text-black">
+          título {{ category.name }}
+        </h1>
+        <a routerLink="['/books/available']">Click to see the books from this category</a>
+    </div>
+      <img src="../../../assets/img3.jpg" alt=" " class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+  </section>
+</div>

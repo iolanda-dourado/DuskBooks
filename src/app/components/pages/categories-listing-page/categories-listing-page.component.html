@@ -1,0 +1,46 @@
+<!-- categories-listing-page.component.html -->
+<div class="min-h-screen flex flex-col text-center">
+  <div class="flex-grow m-24">
+    <!-- Loading State -->
+    <div *ngIf="isLoading"
+      class="m-24 animate-pulse h-80">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+        <div *ngFor="let _ of [].constructor(6)">
+          <div class="h-48 bg-gray-200 rounded-md"></div>
+          <div class="h-6 bg-gray-200 mt-4 w-3/4"></div>
+          <div class="h-4 bg-gray-200 mt-2 w-1/2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Conteúdo Real -->
+    <section *ngIf="!isLoading">
+
+      <!-- Listagem de categorias -->
+      <div *ngIf="categories.length > 0"
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+        <div *ngFor="let category of categories"
+          class="bg-white rounded-lg shadow-md p-4">
+          <a href="#"
+            class="block h-full" (click)="selectCategory(category)">
+            <!-- Nome da categoria com fundo roxo e altura fixa -->
+            <div
+              class="bg-purple-600 text-white text-xl font-semibold py-3 px-4 rounded-t-lg h-24 flex items-center justify-center">
+              {{category.name}}
+            </div>
+            <!-- Espaço para conteúdo adicional (opcional) -->
+            <div class="p-4 text-left">
+              <p class="text-gray-600">Check books!</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Estado Vazio -->
+      <div *ngIf="categories.length === 0"
+        class="text-center text-gray-500">
+        <p class="text-xl bg-white p-4 rounded-md text-black">No categories were found.</p>
+      </div>
+    </section>
+  </div>
+</div>
