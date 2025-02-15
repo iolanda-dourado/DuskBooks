@@ -45,8 +45,10 @@ li {
   margin: 0;
 }
 
-.promo-text {
-  
+.footer {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
 }
 
 @layer components {

@@ -15,11 +15,12 @@ import {
 import { Book } from '../../interfaces/book';
 import { Category } from '../../interfaces/category';
 import { NgFor, NgIf } from '@angular/common';
+import { BackToBooksComponent } from '../buttons/back-to-books/back-to-books.component';
 
 @Component({
   selector: 'app-book-form',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf, NgFor],
+  imports: [ReactiveFormsModule, NgIf, NgFor, BackToBooksComponent],
   templateUrl: './book-form.component.html',
   styleUrl: './book-form.component.css',
 })

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from '../../../services/book.service';
 import { CategoryService } from '../../../services/category.service';
 import { Category } from '../../../interfaces/category';
@@ -23,7 +23,8 @@ export class UpdateBookPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private bookService: BookService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -56,13 +57,16 @@ export class UpdateBookPageComponent implements OnInit {
     this.bookService.putBook(bookData.isbn, bookData).subscribe({
       next: (response) => {
         console.log('Book updated:', response);
+        
 
         // Show success message
         Swal.fire({
           icon: 'success',
           title: 'Success!',
           text: 'The book has been successfully updated.',
-        }).then(() => {});
+        }).then(() => { });
+        
+        this.router.navigate(['/book/' + bookData.isbn]);
       },
       error: (error) => {
         console.error('Error updating book:', error);

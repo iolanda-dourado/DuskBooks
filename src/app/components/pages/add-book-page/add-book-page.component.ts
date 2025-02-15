@@ -5,6 +5,7 @@ import { Category } from '../../../interfaces/category';
 import { BookFormComponent } from '../../book-form/book-form.component';
 import { Book } from '../../../interfaces/book';
 import Swal from 'sweetalert2'; // Importe o SweetAlert2
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-book-page',
@@ -18,7 +19,8 @@ export class AddBookPageComponent implements OnInit {
 
   constructor(
     private bookService: BookService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -47,6 +49,10 @@ export class AddBookPageComponent implements OnInit {
           title: 'Sucesso!',
           text: 'Book registered succesfully.',
         });
+
+        setTimeout(() => {
+          this.router.navigate(['/book/' + bookData.isbn]);
+        }, 2000);
       },
       error: (error) => {
         console.error('Erro ao adicionar livro:', error);

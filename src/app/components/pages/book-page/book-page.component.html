@@ -1,23 +1,27 @@
+<!-- Botão Voltar -->
 <section *ngIf="book"
   class="px-4 py-8 md:py-12 w-full min-h-screen">
   <div class="max-w-4xl mx-auto">
-    <!-- Botão Voltar -->
-    <button routerLink="/books/available"
-      class="mb-8 text-white hover:text-purple-600 transition-colors font-medium text-lg">
-      ← Back to Books
-    </button>
 
     <!-- Botões só para managers -->
     <div *ngIf="isAuthenticated && userRole === 'manager'"
-      class="flex justify-end gap-4 mb-8">
-      <app-button-update-availability [isbn]="book.isbn"></app-button-update-availability>
-      <app-button-remove-book [isbn]="book.isbn"></app-button-remove-book>
-      <app-button-edit-book [book]="book"></app-button-edit-book>
+      class="flex justify-between gap-4 mb-8">
+      <div>
+        <app-back-to-books></app-back-to-books>
+      </div>
+      <div class="flex gap-4">
+        <app-button-update-availability [isbn]="book.isbn"></app-button-update-availability>
+        <app-button-remove-book [isbn]="book.isbn"></app-button-remove-book>
+        <app-button-edit-book [book]="book"></app-button-edit-book>
+      </div>
     </div>
 
     <!-- Botões só para clients -->
     <div *ngIf="isAuthenticated && userRole === 'client'"
-      class="flex justify-end mt-8 mb-4">
+      class="flex justify-between mt-8 mb-4">
+      <div>
+        <app-back-to-books></app-back-to-books>
+      </div>
       <app-button-add-review [isbn]="book.isbn"></app-button-add-review>
     </div>
 
@@ -98,7 +102,7 @@
     <div class="mt-6 bg-gray-50 rounded-sm shadow-md p-6"
       *ngIf="isAuthenticated && userRole === 'client'">
       <h2 class="text-2xl font-bold text-gray-900 mb-6">Reviews</h2>
-    
+
       <!-- Lista de Reviews Paginadas -->
       <div *ngIf="paginatedReviews && paginatedReviews.length > 0; else noReviews"
         class="space-y-6">
@@ -115,12 +119,12 @@
           </p>
         </div>
       </div>
-    
+
       <!-- Estado Vazio (Sem Reviews) -->
       <ng-template #noReviews>
         <p class="text-gray-600 text-center py-6">No reviews yet. Be the first to share your thoughts!</p>
       </ng-template>
-    
+
       <!-- Navegação entre Páginas -->
       <div class="flex justify-between items-center mt-6">
         <!-- Botão Anterior -->
@@ -129,11 +133,11 @@
           class="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 disabled:bg-purple-300 disabled:cursor-not-allowed">
           Previous
         </button>
-    
+
         <span class="text-gray-700">
           Page {{ currentPage }} of {{ totalPages }}
         </span>
-    
+
         <button (click)="nextPage()"
           [disabled]="currentPage === totalPages"
           class="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 disabled:bg-purple-300 disabled:cursor-not-allowed">

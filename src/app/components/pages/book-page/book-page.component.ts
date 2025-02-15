@@ -10,6 +10,7 @@ import { ButtonUpdateAvailabilityComponent } from '../../buttons/button-update-a
 import { ReviewService } from '../../../services/review.service';
 import { Review } from '../../../interfaces/review';
 import { ButtonAddReviewComponent } from '../../buttons/button-add-review/button-add-review.component';
+import { BackToBooksComponent } from '../../buttons/back-to-books/back-to-books.component';
 
 @Component({
   selector: 'app-book-page',
@@ -21,6 +22,7 @@ import { ButtonAddReviewComponent } from '../../buttons/button-add-review/button
     ButtonEditBookComponent,
     ButtonUpdateAvailabilityComponent,
     ButtonAddReviewComponent,
+    BackToBooksComponent
   ],
   templateUrl: './book-page.component.html',
   styleUrl: './book-page.component.css',
