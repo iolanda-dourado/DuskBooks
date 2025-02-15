@@ -4,6 +4,7 @@ import { CategoryService } from '../../../services/category.service';
 import { Category } from '../../../interfaces/category';
 import { BookFormComponent } from '../../book-form/book-form.component';
 import { Book } from '../../../interfaces/book';
+import Swal from 'sweetalert2'; // Importe o SweetAlert2
 
 @Component({
   selector: 'app-add-book-page',
@@ -27,19 +28,33 @@ export class AddBookPageComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error obtaining the categories list: ', err);
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro!',
+          text: 'It was not possible to add the categories list..',
+        });
       },
     });
   }
 
   onFormSubmit(bookData: Book) {
-    console.log('Dados enviados para a API:', bookData); // Verifique os dados enviados
+    console.log('Dados enviados para a API:', bookData);
     this.bookService.postBook(bookData).subscribe({
       next: (response) => {
         console.log('Livro adicionado com sucesso:', response);
+        Swal.fire({
+          icon: 'success',
+          title: 'Sucesso!',
+          text: 'Book registered succesfully.',
+        });
       },
       error: (error) => {
         console.error('Erro ao adicionar livro:', error);
-        console.error('Detalhes do erro:', error.error); // Verifique a mensagem de erro da API
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro!',
+          text: 'It was not possible to add the book.',
+        });
       },
     });
   }

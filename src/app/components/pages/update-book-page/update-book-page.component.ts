@@ -1,4 +1,3 @@
-// update-book-page.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookService } from '../../../services/book.service';
@@ -7,6 +6,7 @@ import { Category } from '../../../interfaces/category';
 import { Book } from '../../../interfaces/book';
 import { BookFormComponent } from '../../book-form/book-form.component';
 import { NgIf } from '@angular/common';
+import Swal from 'sweetalert2'; // Import SweetAlert2
 
 @Component({
   selector: 'app-update-book-page',
@@ -18,7 +18,7 @@ import { NgIf } from '@angular/common';
 export class UpdateBookPageComponent implements OnInit {
   categories: Category[] = [];
   book: Book | null = null;
-  isLoading = true; // Adicione este controle
+  isLoading = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -55,11 +55,24 @@ export class UpdateBookPageComponent implements OnInit {
   onFormSubmit(bookData: Book) {
     this.bookService.putBook(bookData.isbn, bookData).subscribe({
       next: (response) => {
-        console.log('Livro atualizado:', response);
-        window.location.reload();
+        console.log('Book updated:', response);
+
+        // Show success message
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: 'The book has been successfully updated.',
+        }).then(() => {});
       },
       error: (error) => {
-        console.error('Erro na atualização:', error);
+        console.error('Error updating book:', error);
+
+        // Show error message
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'The book could not be updated. Please try again later.',
+        });
       },
     });
   }

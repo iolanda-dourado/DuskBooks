@@ -10,6 +10,8 @@ import { AuthenticationService } from '../../../services/authentication.service'
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { User } from '../../../interfaces/user';
+import { PageLoaderService } from '../../../services/page-loader.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup-page',
@@ -21,13 +23,20 @@ import { User } from '../../../interfaces/user';
 export class SignupPageComponent {
   signupForm!: FormGroup;
   submitted = false;
+  isVisible: boolean = false;
 
   constructor(
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private pageLoader: PageLoaderService
   ) {}
 
   ngOnInit(): void {
+    this.pageLoader.isLoading().subscribe({
+      next: (x) => (this.isVisible = x),
+      error: (err) => console.error(err),
+    });
+
     this.signupForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(6)]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -51,6 +60,7 @@ export class SignupPageComponent {
   }
 
   signupUser(): void {
+    this.pageLoader.showLoader();
     this.submitted = true;
     if (this.signupForm.invalid) {
       return;
@@ -58,13 +68,19 @@ export class SignupPageComponent {
 
     this.authenticationService.register(this.signupForm.value).subscribe({
       next: (response: any) => {
+        this.pageLoader.hideLoader();
         console.log('Registration succesful', response);
 
-        // this.pageLoader.hideLoader();
         this.router.navigate(['signin']);
       },
       error: (error: any) => {
-        // this.pageLoader.hideLoader();
+        this.pageLoader.hideLoader();
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Registration failed. Please verify your credentials.',
+        });
+
         if (error.error instanceof ErrorEvent) {
           console.error('Client error: ', error.error.message);
         } else {

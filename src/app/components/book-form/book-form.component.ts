@@ -92,7 +92,7 @@ export class BookFormComponent implements OnChanges {
         cover: formValue.cover!,
         price: formValue.price!,
         available: this.book?.available || true,
-        category: formValue.category!, // Certifique-se de incluir o campo category
+        category: formValue.category!,
       };
 
       this.formSubmit.emit(bookData);

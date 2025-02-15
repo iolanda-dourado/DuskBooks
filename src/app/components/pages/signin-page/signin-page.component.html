@@ -45,6 +45,10 @@
       </div>
     </form>
 
+    <img src="../../../../assets/loading.gif" class="w-8 m-auto"
+      alt=""
+      [ngClass]="isVisible ? 'visible' : 'hidden'">
+
     <app-button buttonText="Sign in"
       fontSize="1.25rem"
       padding=".4rem .8rem"

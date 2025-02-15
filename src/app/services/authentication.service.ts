@@ -24,11 +24,11 @@ export class AuthenticationService {
       .post<any>(`${this.endpoint}signin`, { email, password })
       .pipe(
         map((response) => {
-          // Verifique se o token está presente na resposta
+          // Verifica se o token está presente na resposta
           if (response && response.token) {
             this.tokenSrv.saveToken('user', JSON.stringify(response));
             this.getUserData().subscribe((user) => {
-              this.userSubject.next(user); // Atualiza o BehaviorSubject com os dados do usuário
+              this.userSubject.next(user);
             });
           }
           return response;

@@ -32,14 +32,14 @@ export class HeaderComponent {
   }
 
   onSearch() {
-    const search = this.searchInput.nativeElement.value; // Captura o valor do input
+    const search = this.searchInput.nativeElement.value;
     if (search) {
       this.bookService.getBookByIsbn(search).subscribe({
         next: (book) => {
           if (book) {
-            this.router.navigate(['/book/', search]); // Navega para a rota do livro com o ISBN
+            this.router.navigate(['/book/', search]); 
           } else {
-            this.router.navigate(['/']); // Redireciona para a home se o livro não existir
+            this.router.navigate(['/']);
           }
           this.searchInput.nativeElement.value = '';
         },

@@ -9,6 +9,8 @@ import {
 import { CommonModule } from '@angular/common';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { Router } from '@angular/router';
+import { PageLoaderService } from '../../../services/page-loader.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signin-page',
@@ -20,13 +22,20 @@ import { Router } from '@angular/router';
 export class SigninPageComponent implements OnInit {
   signinForm!: FormGroup;
   submitted = false;
+  isVisible: boolean = false;
 
   constructor(
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private pageLoader: PageLoaderService
   ) {}
 
   ngOnInit(): void {
+    this.pageLoader.isLoading().subscribe({
+      next: (x) => (this.isVisible = x),
+      error: (err) => console.error(err),
+    });
+
     this.signinForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
@@ -45,30 +54,43 @@ export class SigninPageComponent implements OnInit {
   }
 
   signinUser(): void {
+    this.pageLoader.showLoader();
     this.submitted = true;
+
     if (this.signinForm.invalid) {
+      this.pageLoader.hideLoader();
       return;
     }
 
-    // this.pageLoader.showLoader();
     const email = this.signinForm.value.email;
     const password = this.signinForm.value.password;
 
     this.authenticationService.login(email, password).subscribe({
       next: (response) => {
-        console.log('Login successful', response);
-        this.router.navigate(['']);
+        this.pageLoader.hideLoader();
 
-        // this.pageLoader.hideLoader();
+        // Verifica se a resposta contém um token antes de redirecionar
+        if (response && response.token) {
+          console.log('Login successful', response);
+          this.router.navigate(['']);
+        } else {
+          
+          Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: 'Login failed. Please verify your credentials.',
+          });
+        }
       },
       error: (error) => {
+        this.pageLoader.hideLoader();
         console.error('Login failed', error);
-        // Adicione feedback visual para o usuário
-        if (error.status === 401) {
-          alert('Invalid credentials!');
-        } else {
-          alert('Login error. Please try again later.');
-        }
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Login failed. Please verify your credentials.',
+        });
       },
     });
   }

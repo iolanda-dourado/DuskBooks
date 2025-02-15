@@ -1,0 +1,7 @@
+/* Gradiente de 3 tons */
+.bg-triple-gradient {
+  background-image: linear-gradient(to bottom right,
+      #ffffff,
+      #9b64f3,
+      #3f1780,);
+}
