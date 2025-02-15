@@ -1,0 +1,44 @@
+<!-- modal-add-review.component.html -->
+<div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="bg-white p-6 rounded-xl shadow-lg w-full max-w-md">
+    <h2 class="text-2xl font-semibold text-purple-900 mb-4">Add New Review</h2>
+
+    <!-- Formulário -->
+    <form [formGroup]="reviewForm"
+      (ngSubmit)="onSubmit()">
+      <!-- Campo de texto da review -->
+      <div class="space-y-2">
+        <label for="review"
+          class="block text-gray-700 font-medium">Your Review</label>
+        <textarea id="review"
+          formControlName="review"
+          class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-purple-600 transition-colors"
+          placeholder="Write your review here..."
+          rows="4"></textarea>
+          
+        <!-- Mensagens de Validação -->
+        <div *ngIf="reviewForm.get('review')!.invalid && reviewForm.get('review')!.touched"
+          class="text-red-500 text-sm">
+          <p *ngIf="reviewForm.get('review')!.errors?.['required']">Review is required.</p>
+          <p *ngIf="reviewForm.get('review')!.errors?.['minlength']">
+            Review must be at least 10 characters long.
+          </p>
+        </div>
+      </div>
+
+      <!-- Botões de Ação -->
+      <div class="flex justify-end space-x-4 mt-6">
+        <button type="button"
+          class="px-4 py-2 text-black border border-purple-800 rounded-lg hover:bg-purple-300 transition"
+          (click)="close(false)">
+          Cancel
+        </button>
+        <button type="submit"
+          class="px-4 py-2 bg-purple-800 text-white rounded-lg hover:bg-purple-900 transition"
+          [disabled]="reviewForm.invalid">
+          Add Review
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

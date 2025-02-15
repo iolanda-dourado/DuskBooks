@@ -11,6 +11,6 @@ import { NgIf } from '@angular/common';
   styleUrl: './book-detail.component.css',
 })
 export class BookDetailComponent {
-  @Input() book!: Book; // Recebe os dados do livro
+  @Input() book!: Book;
 
 }

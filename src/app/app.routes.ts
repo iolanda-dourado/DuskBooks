@@ -13,6 +13,7 @@ import { managerGuard } from './guards/manager.guard';
 import { AllBooksListingComponent } from './components/all-books-listing/all-books-listing.component';
 import { UnavailableBooksListingComponent } from './components/unavailable-books-listing/unavailable-books-listing.component';
 import { CategoriesListingPageComponent } from './components/pages/categories-listing-page/categories-listing-page.component';
+import { UpdateBookPageComponent } from './components/pages/update-book-page/update-book-page.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -42,7 +43,11 @@ export const routes: Routes = [
     component: AddBookPageComponent,
     canActivate: [managerGuard],
   },
-
+  {
+    path: 'update-book/:isbn',
+    component: UpdateBookPageComponent,
+    canActivate: [managerGuard],
+  },
   {
     path: 'categories',
     component: CategoriesListingPageComponent,

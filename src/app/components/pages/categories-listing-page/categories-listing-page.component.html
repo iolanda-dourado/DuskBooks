@@ -1,14 +1,14 @@
 <!-- categories-listing-page.component.html -->
 <div class="min-h-screen flex flex-col text-center">
-  <div class="flex-grow m-24">
+  <div class="flex-grow m-8 md:m-12 lg:m-16">
     <!-- Loading State -->
     <div *ngIf="isLoading"
-      class="m-24 animate-pulse h-80">
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+      class="m-8 animate-pulse">
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
         <div *ngFor="let _ of [].constructor(6)">
-          <div class="h-48 bg-gray-200 rounded-md"></div>
-          <div class="h-6 bg-gray-200 mt-4 w-3/4"></div>
-          <div class="h-4 bg-gray-200 mt-2 w-1/2"></div>
+          <div class="h-32 bg-gray-200 rounded-lg"></div>
+          <div class="h-5 bg-gray-200 mt-3 w-3/4 mx-auto"></div>
+          <div class="h-4 bg-gray-200 mt-2 w-1/2 mx-auto"></div>
         </div>
       </div>
     </div>
@@ -16,21 +16,21 @@
     <!-- Conteúdo Real -->
     <section *ngIf="!isLoading">
 
+      <!-- Subheader apenas para managers -->
+      <div *ngIf="role === 'manager'"
+        class="flex justify-end mb-6">
+        <app-button-add-category></app-button-add-category>
+      </div>
+
       <!-- Listagem de categorias -->
       <div *ngIf="categories.length > 0"
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
         <div *ngFor="let category of categories"
-          class="bg-white rounded-lg shadow-md p-4">
-          <a href="#"
-            class="block h-full" (click)="selectCategory(category)">
-            <!-- Nome da categoria com fundo roxo e altura fixa -->
+          class="bg-white rounded-md shadow-sm hover:shadow-md transition-shadow duration-300">
+          <a class="block h-full p-2">
             <div
-              class="bg-purple-600 text-white text-xl font-semibold py-3 px-4 rounded-t-lg h-24 flex items-center justify-center">
+              class="bg-gradient-to-r from-purple-500 to-purple-700 text-white text-lg font-semibold py-2 px-3 rounded-lg h-16 flex items-center justify-center">
               {{category.name}}
-            </div>
-            <!-- Espaço para conteúdo adicional (opcional) -->
-            <div class="p-4 text-left">
-              <p class="text-gray-600">Check books!</p>
             </div>
           </a>
         </div>
@@ -39,7 +39,7 @@
       <!-- Estado Vazio -->
       <div *ngIf="categories.length === 0"
         class="text-center text-gray-500">
-        <p class="text-xl bg-white p-4 rounded-md text-black">No categories were found.</p>
+        <p class="text-lg bg-white p-3 rounded-md text-gray-700">No categories were found.</p>
       </div>
     </section>
   </div>

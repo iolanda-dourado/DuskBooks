@@ -1,0 +1,13 @@
+<!-- update-book-page.component.html -->
+<div *ngIf="!isLoading; else loadingTemplate">
+  <app-book-form [categories]="categories"
+    [book]="book"
+    (formSubmit)="onFormSubmit($event)">
+  </app-book-form>
+</div>
+
+<ng-template #loadingTemplate>
+  <div class="text-center p-8">
+    <p class="text-gray-600">Carregando detalhes do livro...</p>
+  </div>
+</ng-template>

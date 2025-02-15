@@ -41,10 +41,11 @@ export class BookService {
     return this.http.get<Book>(`${this.endpoint}${isbn}`);
   }
 
-  // 6 - Atualiza informação do livro pelo ISBN -> Restrito a MANAGER
-  putBook(updatedBook: Book, isbn: string): Observable<Book> {
+  // 6 - Atualiza informação do livro pelo ISBN 
+  // -> Restrito a MANAGER
+  putBook(isbn: string, updatedBook: Book): Observable<Book> {
     return this.http.put<Book>(
-      `${this.endpoint}${updatedBook.isbn}${isbn}`,
+      `${this.endpoint}${isbn}`,
       updatedBook
     );
   }

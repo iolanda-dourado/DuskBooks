@@ -8,28 +8,35 @@
       ← Back to Books
     </button>
 
-    <!-- Manager buttons -->
+    <!-- Botões só para managers -->
     <div *ngIf="isAuthenticated && userRole === 'manager'"
       class="flex justify-end gap-4 mb-8">
-      <app-button-edit-book></app-button-edit-book>
       <app-button-update-availability [isbn]="book.isbn"></app-button-update-availability>
       <app-button-remove-book [isbn]="book.isbn"></app-button-remove-book>
+      <app-button-edit-book [book]="book"></app-button-edit-book>
+    </div>
+
+
+    <!-- Botões só para clients -->
+    <div *ngIf="isAuthenticated && userRole === 'client'"
+      class="flex justify-end mt-8 mb-4">
+      <app-button-add-review [isbn]="book.isbn"></app-button-add-review>
     </div>
 
     <div class="flex flex-col lg:flex-row gap-8">
       <!-- Capa do Livro (40% width) -->
-      <div class="lg:w-2/5">
-        <div class="bg-white p-4 rounded-lg shadow-md">
+      <div class="lg:w-2/5 top-8 self-start">
+        <div class="bg-white p-1 shadow-md">
           <img [src]="book.cover"
             [alt]="book.title + ' cover image'"
-            class="w-full h-auto object-contain max-h-[500px] rounded-xl"
+            class="w-full h-auto object-contain max-h-[500px]"
             (error)="book.cover = 'https://www.hachette.co.nz/graphics/CoverNotAvailable.jpg'">
         </div>
       </div>
 
       <!-- Detalhes do Livro (60% width) -->
       <div class="lg:w-3/5">
-        <div class="bg-white px-6 py-8 rounded-lg shadow-md space-y-6">
+        <div class="bg-white px-6 py-8 rounded-sm shadow-md space-y-6">
           <!-- Cabeçalho -->
           <div class="space-y-3">
             <h1 class="text-3xl font-bold text-black">{{ book.title }}</h1>
@@ -56,13 +63,13 @@
           <div class="space-y-6 pt-2">
             <div class="flex items-baseline gap-4">
               <span class="text-4xl font-bold text-purple-600">
-                R$ {{ book.price | number:'1.2-2' }}
+                € {{ book.price | number:'1.2-2' }}
               </span>
             </div>
           </div>
 
           <div *ngIf="book.category"
-            class="mt-8 bg-white rounded-lg border-t pt-6">
+            class="mt-8 bg-white rounded-sm border-t pt-6">
             <h4 class="text-xl text-gray-900 font-semibold mb-3">About the {{ book.category }} Category</h4>
             <p class="text-gray-800">
               This carefully selected work is part of our {{ book.category }} collection, featuring
@@ -81,7 +88,37 @@
               </li>
             </ul>
           </div>
+        </div>
 
+
+        <!-- Seção de Reviews -->
+        <div class="mt-6 bg-gray-50 rounded-sm shadow-md p-6"
+          *ngIf="isAuthenticated && userRole === 'client'">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">Reviews</h2>
+
+          <!-- Lista de Reviews -->
+          <div *ngIf="reviews && reviews.length > 0; else noReviews"
+            class="space-y-6">
+            <div *ngFor="let review of reviews"
+              class="border-b pb-6 last:border-b-0">
+              <div class="flex items-center justify-between mb-3">
+                <!-- Revisor e Data -->
+                <div>
+                  <span class="font-semibold text-xl text-black">{{ review.reviewer || 'Anonymous' }}</span>
+                  <span class="text-sm ml-2 text-purple-950">on {{ review.date | date:'mediumDate' }}</span>
+                </div>
+              </div>
+              <!-- Texto da Review -->
+              <p class="text-gray-900 text-lg">
+                {{ review.review }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Estado Vazio (Sem Reviews) -->
+          <ng-template #noReviews>
+            <p class="text-gray-600 text-center py-6">No reviews yet. Be the first to share your thoughts!</p>
+          </ng-template>
         </div>
       </div>
     </div>

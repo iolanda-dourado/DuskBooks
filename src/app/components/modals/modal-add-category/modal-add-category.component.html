@@ -1,0 +1,41 @@
+<div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="bg-white p-6 rounded-xl shadow-lg w-full max-w-md">
+    <h2 class="text-2xl font-semibold text-purple-900 mb-4">Add New Category</h2>
+
+    <!-- Formulário -->
+    <form [formGroup]="categoryForm"
+      (ngSubmit)="onSubmit()">
+      <!-- Campo de Nome da Categoria -->
+      <div class="space-y-2">
+        <label for="name"
+          class="block text-gray-700 font-medium">Category Name</label>
+        <input type="text"
+          id="name"
+          formControlName="name"
+          class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-purple-600 transition-colors"
+          placeholder="Enter category name">
+        <!-- Mensagens de Validação -->
+        <div *ngIf="categoryForm.get('name')!.invalid && (categoryForm.get('name')!.touched)"
+          class="text-red-500 text-sm">
+          <p *ngIf="categoryForm.get('name')!.errors?.['required']">Category name is required.</p>
+          <p *ngIf="categoryForm.get('name')!.errors?.['minlength']">Category name must be at least 3 characters long.
+          </p>
+        </div>
+      </div>
+
+      <!-- Botões de Ação -->
+      <div class="flex justify-end space-x-4 mt-6">
+        <button type="button"
+          class="px-4 py-2 text-black border border-purple-800 rounded-lg hover:bg-purple-300 transition"
+          (click)="close(false)">
+          Cancel
+        </button>
+        <button type="submit"
+          class="px-4 py-2 bg-purple-800 text-white rounded-lg hover:bg-purple-900 transition"
+          [disabled]="categoryForm.invalid">
+          Add Category
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

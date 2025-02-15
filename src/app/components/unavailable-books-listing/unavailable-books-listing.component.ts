@@ -4,10 +4,9 @@ import { BookService } from '../../services/book.service';
 import { CommonModule } from '@angular/common';
 import { BookDetailComponent } from '../book-detail/book-detail.component';
 import { ButtonAddBookComponent } from '../buttons/button-add-book/button-add-book.component';
-import { ButtonGetUnavailableBooksComponent } from '../buttons/button-get-unavailable-books/button-get-unavailable-books.component';
 import { FormsModule } from '@angular/forms';
-import { CategoryService } from '../../services/category.service'; // Importe o CategoryService
-import { Category } from '../../interfaces/category'; // Importe a interface Category
+import { CategoryService } from '../../services/category.service'; 
+import { Category } from '../../interfaces/category';
 
 @Component({
   selector: 'app-unavailable-books-listing',
@@ -16,7 +15,6 @@ import { Category } from '../../interfaces/category'; // Importe a interface Cat
     CommonModule,
     BookDetailComponent,
     ButtonAddBookComponent,
-    ButtonGetUnavailableBooksComponent,
     FormsModule,
   ],
   templateUrl: './unavailable-books-listing.component.html',
@@ -24,15 +22,15 @@ import { Category } from '../../interfaces/category'; // Importe a interface Cat
 })
 export class UnavailableBooksListingComponent implements OnInit {
   @Output() selectedBook = new EventEmitter<Book>();
-  books: Book[] = []; // Lista completa de livros indisponíveis
-  filteredBooks: Book[] = []; // Lista de livros filtrados
-  categories: Category[] = []; // Lista de categorias
-  selectedCategory: string = 'all'; // Categoria selecionada (default: 'all')
+  books: Book[] = [];
+  filteredBooks: Book[] = [];
+  categories: Category[] = [];
+  selectedCategory: string = 'all';
   isLoading: boolean = true;
 
   constructor(
     private bookService: BookService,
-    private categoryService: CategoryService // Injete o CategoryService
+    private categoryService: CategoryService
   ) {}
 
   ngOnInit(): void {
@@ -40,7 +38,7 @@ export class UnavailableBooksListingComponent implements OnInit {
     this.bookService.getUnavailableBooks().subscribe({
       next: (books) => {
         this.books = books;
-        this.filteredBooks = books; // Inicializa a lista filtrada com todos os livros
+        this.filteredBooks = books; 
         this.isLoading = false;
       },
       error: (err) => {
@@ -60,7 +58,6 @@ export class UnavailableBooksListingComponent implements OnInit {
     });
   }
 
-  // Método para filtrar os livros por categoria
   filterBooksByCategory(categoryName: string): void {
     this.selectedCategory = categoryName;
     if (categoryName === 'all') {
