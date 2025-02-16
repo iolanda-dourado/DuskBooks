@@ -14,6 +14,7 @@ import { AllBooksListingComponent } from './components/all-books-listing/all-boo
 import { UnavailableBooksListingComponent } from './components/unavailable-books-listing/unavailable-books-listing.component';
 import { CategoriesListingPageComponent } from './components/pages/categories-listing-page/categories-listing-page.component';
 import { UpdateBookPageComponent } from './components/pages/update-book-page/update-book-page.component';
+import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -52,4 +53,5 @@ export const routes: Routes = [
     path: 'categories',
     component: CategoriesListingPageComponent,
   },
+  { path: '**', component: PageNotFoundComponent },
 ];

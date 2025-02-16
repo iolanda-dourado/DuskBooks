@@ -17,7 +17,7 @@
 
       <!-- Botão de chamada para ação -->
       <div class="inline-block group"> <!-- Container ajustado -->
-        <a [routerLink]="['/books']"
+        <a [routerLink]="['/books/available']"
           class="inline-block"> <!-- Link como inline-block -->
           <button class="px-6 py-3 text-2xl text-white bg-black/50 hover:bg-black/60 backdrop-blur-sm border-2 border-white/10 rounded-lg 
                          transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:border-white/10 
@@ -68,7 +68,7 @@
     </p>
 
     <div class="mt-8">
-      <a routerLink="/books" class="inline-block">
+      <a routerLink="/books/available" class="inline-block">
         <button class="px-8 py-4 text-xl text-white bg-purple-600 hover:bg-purple-700 rounded-lg transition-all duration-300 
                        hover:shadow-[0_0_20px_rgba(192,132,252,0.5)] hover:-translate-y-1 flex items-center gap-3">
           <span>Browse Full Catalog</span>
